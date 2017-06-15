@@ -24,7 +24,7 @@ import Toolbar from '../../../../components/Toolbar';
 import Color from '../../../../config/Variables';
 import { connect } from 'react-redux';
 import { save,fetch, saveImage } from '../../../../actions/index';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { MaterialIcons as Icon }from '@expo/vector-icons';
 import { Actions } from 'react-native-router-flux';
 import Step from '../../../../components/StepperSingleStep';
 import ImagePicker from 'react-native-image-crop-picker';

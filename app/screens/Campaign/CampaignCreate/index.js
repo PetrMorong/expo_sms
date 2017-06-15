@@ -18,7 +18,7 @@ import Toolbar from '../../../components/Toolbar';
 import Color from '../../../config/Variables';
 import { connect } from 'react-redux';
 import { save } from '../../../actions/index';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { MaterialIcons as Icon }from '@expo/vector-icons';
 import { Actions } from 'react-native-router-flux';
 import Button from '../../../components/Button';
 import DrawerLayout from 'react-native-drawer-layout';
@@ -270,7 +270,16 @@ const styles = StyleSheet.create({
     buttonText: {
         fontWeight: '500',
         color: Color.buttonText
-    }
+    },
+    input: {
+        color: 'black',
+        borderBottomColor: 'green',
+        flex: 1,
+        padding: 5,
+        marginLeft: 10,
+        marginRight: 10,
+        height: 50
+    },
 
 });
 

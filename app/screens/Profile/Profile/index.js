@@ -14,17 +14,18 @@ import {
     Dimensions,
     TextInput,
     TouchableOpacity,
+    TouchableHighlight,
     TouchableWithoutFeedback,
     ScrollView,
     ActivityIndicator
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { MaterialIcons as Icon }from '@expo/vector-icons';
 import Menu from '../../../components/Menu';
 import Toolbar from '../../../components/Toolbar';
 import Color from '../../../config/Variables';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import ImagePicker from 'react-native-image-crop-picker';
+import { ImagePicker } from 'expo';
 import { save } from '../../../actions/index';
 import { fromJS } from 'immutable';
 import DrawerLayout from 'react-native-drawer-layout';
@@ -55,6 +56,51 @@ export default class Profile extends Component {
             this.setState({savingImage: false})
         }
     }
+
+    choosePhoto = async () => {
+
+        this.setState({modalVisible: false})
+
+        let result = await ImagePicker.launchImageLibraryAsync({
+            allowsEditing: true,
+            aspect: [4, 3],
+            noData: false
+        });
+
+        console.log(result)
+
+        this.props.dispatch(save('profile/save-image', {reducer: 'profile'} ,{photo: result.uri}));
+
+        let map = fromJS(this.props.user).merge({photo: result.uri}).toJS();
+
+        this.props.dispatch({type: 'PROFILE_SAVE_SUCCESS', payload: map});
+
+        this.setState({imageSource: result.uri, modalVisible: false});
+
+    };
+
+    takePhoto = async () => {
+
+        this.setState({modalVisible: false})
+
+        let result = await ImagePicker.launchCameraAsync({
+            allowsEditing: true,
+            aspect: [4, 3],
+        });
+
+        this.props.dispatch(save('profile/save-image', {reducer: 'profile'} ,{photo: result.uri}));
+
+        let map = fromJS(this.props.user).merge({photo: result.uri}).toJS();
+
+        this.props.dispatch({type: 'PROFILE_SAVE_SUCCESS', payload: map});
+
+        this.setState({imageSource: result.uri})
+    };
+
+    setModalVisible(visible) {
+        this.setState({modalVisible: visible});
+    };
+
 
     render() {
         let image;
@@ -99,31 +145,31 @@ export default class Profile extends Component {
                                         {image}
                                         {imageIcon}
                                     </View>
-                                    <Text style={styles.email}>{this.props.user.email}</Text>
+                                    <Text style={styles.email}>{this.props.user.first_name} {this.props.user.last_name}</Text>
+                                    <Text style={{color: 'white', fontSize: 16, marginTop: 5}}>{this.props.user.email}</Text>
                                 </View>
                             </TouchableWithoutFeedback>
                         </View>
                         <View style={styles.infoWrap}>
-                            <View style={{padding: 15}}>
-                                <Text style={styles.textHighlight}>{_('Name')}</Text>
+                            <View style={{padding: 10}}>
                                 <Text style={styles.textHighlight}>{_('Phone number')}</Text>
                                 <Text style={styles.textHighlight}>{_('Timezone')}</Text>
                                 <Text style={styles.textHighlight}>{_('Country')}</Text>
                             </View>
-                            <View style={{padding: 15}}>
-                                <Text style={styles.marginTop}>{this.props.user.first_name} {this.props.user.last_name}</Text>
+                            <View style={{padding: 10, flex: 1}}>
                                 <Text style={styles.marginTop}>{this.props.user.phone_number}</Text>
                                 <Text style={styles.marginTop}>{this.props.user.timezone}</Text>
                                 <Text style={styles.marginTop}>{this.props.countries[this.props.user.country]}</Text>
                             </View>
-                        </View>
-                        <TouchableOpacity onPress={()=>Actions.BaseInformations()}>
-                            <View style={{paddingLeft: 15, paddingRight: 30, marginTop: -45, flexDirection: "row", alignItems: "flex-end", flex: 1, justifyContent: "flex-end"}}>
-                                <View style={styles.actionStatus}>
-                                    <Icon name="edit" size={25} style={{color: Color.buttonText}}/>
+                            <TouchableOpacity onPress={()=>Actions.BaseInformations()}>
+                                <View style={{alignItems: 'flex-end', justifyContent: 'flex-end', height: 100, padding: 10}}>
+                                    <View style={styles.actionStatus}>
+                                        <Icon name="edit" size={25} style={{color: Color.buttonText}}/>
+                                    </View>
                                 </View>
-                            </View>
-                        </TouchableOpacity>
+                            </TouchableOpacity>
+                        </View>
+
                         <View style={styles.actionWrap}>
                             <TouchableOpacity onPress={()=>Actions.ChangePassword()}>
                                 <View style={{alignItems: 'center', width: 100}}>
@@ -177,54 +223,7 @@ export default class Profile extends Component {
         )
     }
 
-    setModalVisible(visible) {
-        this.setState({modalVisible: visible});
-    };
 
-    choosePhoto(){
-        ImagePicker.openPicker({
-            width: 110,
-            height: 110,
-            cropping: true,
-            includeBase64: true,
-            cropperTintColor: '#011D2B'
-        }).then(image => {
-            this.setModalVisible(false);
-
-            this.props.dispatch(save('profile/save-image', {reducer: 'profile'} ,{photo: image.data}));
-
-            let map = fromJS(this.props.user).merge({photo: image.data}).toJS();
-
-            this.props.dispatch({type: 'PROFILE_SAVE_SUCCESS', payload: map});
-
-            this.setState({
-                imageSource: image.path
-            });
-        });
-
-    }
-
-    takePhoto(){
-        ImagePicker.openCamera({
-            width: 110,
-            height: 110,
-            cropping: true,
-            includeBase64: true,
-            cropperTintColor: '#011D2B'
-        }).then(image => {
-            this.setModalVisible(false);
-
-            this.props.dispatch(save('profile/save-image', {reducer: 'profile'} ,{photo: image.data}));
-
-            let map = fromJS(this.props.user).merge({photo: image.data}).toJS();
-
-            this.props.dispatch({type: 'PROFILE_SAVE_SUCCESS', payload: map});
-
-            this.setState({
-                imageSource: image.path
-            });
-        });
-    }
 
 }
 
@@ -276,7 +275,7 @@ const styles = StyleSheet.create({
     },
     infoWrap: {
         margin: 15,
-        height: 130,
+        height: 100,
         backgroundColor: Color.cardBackground,
         borderRadius: 3,
         marginTop: -40,

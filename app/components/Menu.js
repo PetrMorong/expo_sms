@@ -1,4 +1,4 @@
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { MaterialIcons as Icon }from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import Color from '../config/Variables';
 import { Actions } from 'react-native-router-flux';
@@ -12,6 +12,7 @@ const {
     Image,
     Text,
     TouchableOpacity,
+    TouchableHighlight,
     Animated,
     Easing
 } = require('react-native');
@@ -119,14 +120,14 @@ export default class Menu extends Component {
         let smsItem;
         if(this.state.toggleSms){
             smsItem = <View>
-                <TouchableOpacity onPress={() => this.toggleItem('toggleSms')}>
+                <TouchableHighlight onPress={() => this.toggleItem('toggleSms')}>
                     <View style={styles.menuRowActive} >
                         <Icon name="email" style={styles.menuRightIconActive}/>
                         <Text style={styles.menuLinkActive}>SMS</Text>
                         <View style={{flex: 1}} />
                         <Icon name="arrow-drop-down"  style={styles.menuChevronDownActive} size={25} />
                     </View>
-                </TouchableOpacity>
+                </TouchableHighlight>
                 <Animated.View style={[styles.collapsableBody, {height: this.state.animatedValSms}]}>
                     <TouchableOpacity onPress={(event) => Actions.CampaignCreate()}>
                         <View style={styles.menuRow}>
@@ -195,7 +196,7 @@ export default class Menu extends Component {
                 <TouchableOpacity onPress={() => this.toggleItem('toggleStore')}>
                     <View style={styles.menuRowActive} >
                         <Icon name="store" style={styles.menuRightIconActive}/>
-                        <Text style={styles.menuLinkActive}>{_('Store')}</Text>
+                        <Text style={styles.menuLinkActive}>{_('Public page')}</Text>
                         <View style={{flex: 1}} />
                         <Icon name="arrow-drop-down"  style={styles.menuChevronDownActive} size={25} />
                     </View>
@@ -204,13 +205,13 @@ export default class Menu extends Component {
                     <TouchableOpacity onPress={(event) => Actions.StoreCreate()}>
                         <View style={styles.menuRow}>
                             <Icon name="add" style={styles.menuRightIcon}/>
-                            <Text style={styles.menuLink} >{_('Create store')}</Text>
+                            <Text style={styles.menuLink} >{_('Create page')}</Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={(event) => Actions.StoreList()}>
                         <View style={styles.menuRow}>
                             <Icon name="store" style={styles.menuRightIcon}/>
-                            <Text style={styles.menuLink} >{_('Stores')}</Text>
+                            <Text style={styles.menuLink} >{_('Pages')}</Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={(event) => Actions.OrderList()}>
@@ -284,7 +285,7 @@ export default class Menu extends Component {
 
         return (
             <ScrollView style={styles.menu}>
-                <TouchableOpacity onPress={(event) => Actions.Profile()}>
+                <TouchableHighlight onPress={(event) => Actions.Profile()}>
                     <View style={styles.avatarContainer}>
                         <View style={[styles.avatar, {backgroundColor: Color.secondaryColor}]}>
                             {image}
@@ -292,7 +293,7 @@ export default class Menu extends Component {
                         <Text style={styles.name}>{this.props.user.first_name} {this.props.user.last_name}</Text>
                         <Text style={styles.email}>{this.props.user.email}</Text>
                     </View>
-                </TouchableOpacity>
+                </TouchableHighlight>
                 <View scrollsToTop={false}>
                     <TouchableOpacity onPress={(event) => Actions.DashboardNewUser()}>
                         <View style={styles.menuRow} >
@@ -388,7 +389,8 @@ const styles = StyleSheet.create({
         color: Color.menuText
     },
     menuRightIcon: {
-        fontSize: 20
+        fontSize: 20,
+        color: Color.menuText
     },
     menuLinkActive: {
         fontSize: 16,

@@ -23,7 +23,7 @@ import Menu from '../../components/Menu';
 import Toolbar from '../../components/Toolbar';
 import Color from '../../config/Variables';
 import { connect } from 'react-redux';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { MaterialIcons as Icon }from '@expo/vector-icons';
 import { Actions } from 'react-native-router-flux';
 import { TabViewAnimated, TabBar } from 'react-native-tab-view';
 import moment from 'moment';

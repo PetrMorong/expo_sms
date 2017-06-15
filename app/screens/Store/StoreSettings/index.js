@@ -22,9 +22,9 @@ import Toolbar from '../../../components/Toolbar';
 import Color from '../../../config/Variables';
 import { connect } from 'react-redux';
 import { save, fetch, saveImage} from '../../../actions/index'
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { MaterialIcons as Icon }from '@expo/vector-icons';
 import { Actions } from 'react-native-router-flux';
-import ImagePicker from 'react-native-image-crop-picker';
+import { ImagePicker } from 'expo';
 import { fromJS } from 'immutable';
 import Button from '../../../components/Button';
 import DrawerLayout from 'react-native-drawer-layout';
@@ -64,7 +64,7 @@ export default class StoreSettings extends Component{
     }
 
     componentWillMount(){
-        this.props.dispatch(fetch('store/store-data', {reducer: 'storeSettings'}, {id: this.props.id}))
+        this.props.dispatch(fetch('public-page/page-data', {reducer: 'storeSettings'}, {id: this.props.id}))
     }
 
     componentWillReceiveProps(nextProps){

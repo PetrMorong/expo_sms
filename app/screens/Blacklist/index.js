@@ -16,14 +16,15 @@ import {
     TouchableOpacity,
     TouchableWithoutFeedback,
     ScrollView,
-    ActivityIndicator
+    ActivityIndicator,
+    StatusBar
 } from 'react-native';
 import Menu from '../../components/Menu';
 import Toolbar from '../../components/Toolbar';
 import Color from '../../config/Variables';
 import { connect } from 'react-redux';
 import { save, fetch, deleteListItem } from '../../actions/index';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { MaterialIcons as Icon }from '@expo/vector-icons';
 import { Actions } from 'react-native-router-flux';
 import FlatList from 'react-native/Libraries/Lists/FlatList';
 import GetProduct from '../../helperFunctions/GetProduct';
@@ -563,7 +564,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: Color.toolbar,
-        height: 60,
+        paddingTop: StatusBar.currentHeight,
+        height: 60 + StatusBar.currentHeight,
         padding: 15,
     },
     bottomButton: {

@@ -3,7 +3,6 @@
  */
 import React, { Component } from 'react';
 import { StyleSheet, Modal,  Button,  Text, Picker, View, Image, Switch,  Dimensions, TextInput, TouchableNativeFeedback, TouchableWithoutFeedback, ScrollView, ART, LayoutAnimation} from 'react-native';
-import ElevatedView from 'react-native-elevated-view';
 import { connect } from 'react-redux';
 
 import Pie from './Pie';
@@ -148,6 +147,7 @@ export default class Costs extends Component{
 
 const styles = {
     container: {
+        flex: 1,
         backgroundColor: '#E2E2E2'
     },
     chart_title : {

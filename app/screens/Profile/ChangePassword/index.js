@@ -111,7 +111,6 @@ export default class ChangePassword extends Component {
         let menu  = <Menu/>;
         return (
 
-
                 <View style={styles.container}>
                     <Toolbar
                         openMenu={() => this.drawer.openDrawer()}
@@ -124,7 +123,7 @@ export default class ChangePassword extends Component {
                             <TextInput
                                 onChangeText={(password) => this.setState({password, buttonStatus: 'changed'})}
                                 value={this.state.password}
-                                style={{flex: 1, marginLeft: 10, marginRight: 10, }}
+                                style={styles.input}
                                 placeholder={_('Password')}
                                 secureTextEntry={true}
                                 returnKeyLabel="nice"
@@ -135,7 +134,7 @@ export default class ChangePassword extends Component {
                             <TextInput
                                 onChangeText={(newPassword) => {this.setState({newPassword, buttonStatus: 'changed'}); this.handleValidatePassword(newPassword)}}
                                 value={this.state.newPassword}
-                                style={{flex: 1, marginLeft: 10, marginRight: 10}}
+                                style={styles.input}
                                 placeholder={_('New password')}
                                 secureTextEntry={true}
                             />
@@ -145,7 +144,7 @@ export default class ChangePassword extends Component {
                             <TextInput
                                 onChangeText={(newPasswordAgain) => {this.setState({newPasswordAgain, buttonStatus: 'changed'}); this.handleMatchPassword(newPasswordAgain)}}
                                 value={this.state.newPasswordAgain}
-                                style={{flex: 1, marginLeft: 10, marginRight: 10}}
+                                style={styles.input}
                                 placeholder={_('New password again')}
                                 secureTextEntry={true}/>
                             {newPasswordAgainError}
@@ -163,13 +162,6 @@ export default class ChangePassword extends Component {
     }
 
 
-
-
-    navigateToScreen(link) {
-        this.props.navigator.push({
-            ident: link
-        })
-    }
 }
 
 const styles = StyleSheet.create({
@@ -189,6 +181,14 @@ const styles = StyleSheet.create({
     buttonText: {
         fontWeight: '500',
         color: Color.buttonText
+    },
+    input: {
+        color: 'black',
+        borderBottomColor: 'green',
+        flex: 1,
+        padding: 5,
+        marginRight: 10,
+        height: 50
     }
 });
 

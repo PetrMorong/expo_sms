@@ -56,7 +56,7 @@ export default class StoreCreate extends Component{
     }
 
     handleSave(){
-        this.props.dispatch(save('store/create-store', {reducer: 'storeCreate'},{name: this.state.text}))
+        this.props.dispatch(save('public-page/create-page', {reducer: 'storeCreate'},{name: this.state.text}))
     }
 
 
@@ -71,7 +71,7 @@ export default class StoreCreate extends Component{
                     <Toolbar
                         openMenu={() => this.drawer.openDrawer()}
                         background="containerNoBg"
-                        title={_('Create store')}
+                        title={_('Create page')}
                         elevation={0}/>
                     <View style={styles.container}>
                         <View style={styles.imageContainer}>
@@ -79,6 +79,7 @@ export default class StoreCreate extends Component{
                         </View>
                         <View style={{padding: 15, marginTop: 30}}>
                             <TextInput
+                                style={styles.input}
                                 onChangeText={(text) => this.setState({text})}
                                 value={this.state.text}
                                 placeholder={_('Store name')}/>
@@ -116,6 +117,14 @@ const styles = StyleSheet.create({
     image: {
         height: 235,
         width: 300
+    },
+    input: {
+        color: 'black',
+        borderBottomColor: 'green',
+        padding: 5,
+        marginLeft: 10,
+        marginRight: 10,
+        height: 50
     }
 });
 

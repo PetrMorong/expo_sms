@@ -18,7 +18,7 @@ import {
 } from 'react-native';
 import Button from './Button';
 import DatePicker from 'react-native-datepicker';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { MaterialIcons as Icon }from '@expo/vector-icons';
 import moment from 'moment';
 
 const window = Dimensions.get('window');

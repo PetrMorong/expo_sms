@@ -22,7 +22,7 @@ import Menu from '../../../components/Menu';
 import Toolbar from '../../../components/Toolbar';
 import { connect } from 'react-redux';
 import { save, fetch } from '../../../actions/index';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { MaterialIcons as Icon }from '@expo/vector-icons';
 import FlatList from 'react-native/Libraries/Lists/FlatList';
 import GetProduct from '../../../helperFunctions/GetProduct';
 import GetMethod from '../../../helperFunctions/GetMethod';

@@ -18,7 +18,7 @@ import {
     ScrollView,
     ActivityIndicator
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { MaterialIcons as Icon }from '@expo/vector-icons';
 import Contacts from 'react-native-contacts';
 import Toolbar from '../../../../../components/Toolbar';
 import Menu from '../../../../../components/Menu';

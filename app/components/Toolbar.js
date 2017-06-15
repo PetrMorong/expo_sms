@@ -2,9 +2,8 @@
  * Created by Petr on 25.1.2017.
  */
 import React, { Component } from 'react';
-import { StyleSheet,  Text,  View, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import ElevatedView from 'react-native-elevated-view'
+import { StyleSheet,  Text,  View, TouchableOpacity, TouchableWithoutFeedback, StatusBar } from 'react-native';
+import { MaterialIcons as Icon }from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import Color from '../config/Variables';
 import { Actions } from 'react-native-router-flux';
@@ -82,13 +81,26 @@ export default class Toolbar extends Component {
                 </TouchableWithoutFeedback>
         }
 
+        let style;
+        if(this.props.background == 'container'){
+            style = {
+                backgroundColor: Color.toolbar,
+                elevation: this.props.elevation
+            }
+        }else if(this.props.background == 'containerNoBg'){
+            style = {
+                backgroundColor: Color.secondaryColor,
+                elevation: this.props.elevation
+            }
+        }
+
 
         return (
-            <ElevatedView style={styles[this.props.background]} elevation={this.props.elevation}>
+            <View style={[styles.container, style]}>
                 {leftIcon}
                 {title}
                 {right}
-            </ElevatedView>
+            </View>
         );
     }
 
@@ -100,21 +112,16 @@ export default class Toolbar extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        height: 60,
+        paddingTop: StatusBar.currentHeight,
+        height: 60 + StatusBar.currentHeight,
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'center',
         paddingRight: 15,
-        backgroundColor: Color.toolbar
-    },
-    containerNoBg: {
-        height: 60,
-        flexDirection: 'row',
-        alignItems: 'center',
-        paddingRight: 15,
-        backgroundColor: Color.secondaryColor
     },
     menuIcon: {
         color: Color.toolbarText,
+        width: 30,
     },
     screenName: {
         color: Color.toolbarText,

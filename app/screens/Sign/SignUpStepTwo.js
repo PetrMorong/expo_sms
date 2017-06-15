@@ -22,10 +22,10 @@ import Toolbar from '../../components/Toolbar';
 import Color from '../../config/Variables';
 import { connect } from 'react-redux';
 import { save } from '../../actions/index';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { MaterialIcons as Icon }from '@expo/vector-icons';
 import { Actions } from 'react-native-router-flux';
 import { fetchUser } from '../../actions/index';
-import ImagePicker from 'react-native-image-crop-picker';
+import { ImagePicker } from 'expo';
 
 
 const window = Dimensions.get('window');
@@ -47,6 +47,30 @@ export default class SignUpStepTwo extends Component {
             modalVisible: false,
             imageSource: false
         }
+    }
+
+    setModalVisible(visible) {
+        this.setState({modalVisible: visible});
+    };
+
+    choosePhoto = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            allowsEditing: true,
+            aspect: [4, 3],
+        });
+
+        this.setState({imageSource: result.uri, modalVisible: false})
+
+
+    }
+
+    takePhoto = async () => {
+        let result = await ImagePicker.launchCameraAsync({
+            allowsEditing: true,
+            aspect: [4, 3],
+        });
+
+        this.setState({imageSource: result.uri, modalVisible: false})
     }
 
     render() {
@@ -119,6 +143,7 @@ export default class SignUpStepTwo extends Component {
                         </View>
                     </View>
                 </View>
+
                 <Modal
                     animationType={"slide"}
                     transparent={true}
@@ -132,13 +157,13 @@ export default class SignUpStepTwo extends Component {
                             <TouchableOpacity onPress={() => this.takePhoto()}>
                                 <View style={styles.modalRow}>
                                     <Icon name="photo-camera" size={30} style={styles.modalIcon}/>
-                                    <Text style={styles.modalText}>Take a photo</Text>
+                                    <Text style={styles.modalText}>{_('Take a photo')}</Text>
                                 </View>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => this.choosePhoto()}>
                                 <View style={styles.modalRow}>
                                     <Icon name="collections" size={30} style={styles.modalIcon}/>
-                                    <Text style={styles.modalText}>Choose from gallery</Text>
+                                    <Text style={styles.modalText}>{_('Choose from gallery')}</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -146,43 +171,6 @@ export default class SignUpStepTwo extends Component {
                 </Modal>
             </View>
         )
-    }
-
-    setModalVisible(visible) {
-        this.setState({modalVisible: visible});
-    };
-
-    choosePhoto(){
-        ImagePicker.openPicker({
-            width: 110,
-            height: 110,
-            cropping: true,
-            includeBase64: true,
-            cropperTintColor: '#011D2B'
-
-        }).then(image => {
-            this.setModalVisible(false);
-            this.setState({
-                imageSource: image.path
-            });
-        });
-
-    }
-
-    takePhoto(){
-        ImagePicker.openCamera({
-            width: 110,
-            height: 110,
-            cropping: true,
-            includeBase64: true,
-            cropperTintColor: '#011D2B'
-
-        }).then(image => {
-            this.setModalVisible(false);
-            this.setState({
-                imageSource: image.path
-            });
-        });
     }
 
 }

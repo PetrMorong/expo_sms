@@ -24,6 +24,7 @@ import { save } from '../../../actions/index';
 import Button from '../../../components/Button';
 import { fromJS } from 'immutable';
 import DrawerLayout from 'react-native-drawer-layout';
+import { Actions } from 'react-native-router-flux';
 
 
 const window = Dimensions.get('window');
@@ -67,12 +68,9 @@ export default class BaseInformations extends Component {
     }
 
     componentWillReceiveProps(nextProps){
-        if(nextProps.baseInformations.saving){
-            this.setState({buttonStatus: 'saving'})
-        }
-
         if(nextProps.baseInformations.saved){
             this.setState({buttonStatus: 'saved'})
+            Actions.pop()
         }
 
         if(nextProps.baseInformations.error){
@@ -81,6 +79,9 @@ export default class BaseInformations extends Component {
     }
 
     handleSave() {
+
+        this.setState({buttonStatus: 'saving'})
+
         let data = this.createData();
 
         this.props.dispatch(save('profile/save', {reducer: 'baseInformations'} ,data));
@@ -88,6 +89,8 @@ export default class BaseInformations extends Component {
         let map = fromJS(this.props.user).merge(data).toJS();
 
         this.props.dispatch({type: 'PROFILE_SAVE_SUCCESS', payload: map})
+
+
     }
 
     render() {
@@ -133,14 +136,14 @@ export default class BaseInformations extends Component {
                         <TextInput
                             onChangeText={(first_name) => this.setState({first_name, buttonStatus: 'changed'})}
                             value={this.state.first_name}
-                            style={{flex: 1, marginLeft: 10, marginRight: 10, }}
+                            style={styles.input}
                             placeholder={_('First name')}
                             placeholderTextColor={Color.displayText}
                             underlineColorAndroid={Color.displayText}/>
                         <TextInput
                             onChangeText={(last_name) => this.setState({last_name, buttonStatus: 'changed'})}
                             value={this.state.last_name}
-                            style={{flex: 1, marginLeft: 10, marginRight: 10, }}
+                            style={styles.input}
                             placeholder={_('Last name')}
                             placeholderTextColor={Color.displayText}
                             underlineColorAndroid={Color.displayText}/>
@@ -149,7 +152,7 @@ export default class BaseInformations extends Component {
                         <TextInput
                             onChangeText={(phone_number) => this.setState({phone_number, buttonStatus: 'changed'})}
                             value={this.state.phone_number}
-                            style={{flex: 1, marginLeft: 10, marginRight: 10}}
+                            style={styles.input}
                             placeholder={_('Phone number')}
                             placeholderTextColor={Color.displayText}
                             underlineColorAndroid={Color.displayText}/>
@@ -191,7 +194,16 @@ const styles = StyleSheet.create({
     buttonText: {
         fontWeight: '500',
         color: Color.buttonText
-    }
+    },
+    input: {
+        color: 'black',
+        borderBottomColor: 'green',
+        flex: 1,
+        padding: 5,
+        marginLeft: 10,
+        marginRight: 10,
+        height: 50
+    },
 });
 
 module.exports = connect(mapStateToProps)(BaseInformations);

@@ -19,7 +19,7 @@ import {
     Animated,
     Easing
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { MaterialIcons as Icon }from '@expo/vector-icons';
 
 const window = Dimensions.get('window');
 

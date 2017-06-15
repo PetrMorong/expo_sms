@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Button,  Text, Picker, View, Image, Switch,  Dimensions, TextInput, TouchableOpacity, TouchableWithoutFeedback, ScrollView} from 'react-native';
 import Checkbox from '../../components/CheckBox'
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { MaterialIcons as Icon }from '@expo/vector-icons';
 import Color from '../../config/Variables';
 import { connect } from 'react-redux';
 import { saveImage } from '../../actions/index'

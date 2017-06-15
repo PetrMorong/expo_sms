@@ -19,7 +19,7 @@ import {
 } from 'react-native';
 import Menu from '../../../components/Menu';
 import Toolbar from '../../../components/Toolbar';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { MaterialIcons as Icon }from '@expo/vector-icons';
 import GetProduct from '../../../helperFunctions/GetProduct';
 import GetMethod from '../../../helperFunctions/GetMethod';
 import Color from '../../../config/Variables';

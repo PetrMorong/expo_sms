@@ -1,7 +1,7 @@
 /**
  * Created by Petr on 9.2.2017.
  */
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { MaterialIcons as Icon }from '@expo/vector-icons';
 
 import React, {Component} from 'react';
 import {
@@ -141,7 +141,7 @@ export default class ContactVerification extends Component{
                         onChangeText={(code) => this.setState({code})}
                         value={this.state.code}
                         keyboardType='numeric'
-                        style={{flex: 1, marginRight: 10, }}
+                        style={styles.input}
                         placeholder={_('code')}
                     />
                 </View>
@@ -240,6 +240,14 @@ const styles = StyleSheet.create({
     buttonText: {
         fontWeight: '500',
         color: Color.buttonText
+    },
+    input: {
+        color: 'black',
+        borderBottomColor: 'green',
+        flex: 1,
+        padding: 5,
+        marginRight: 10,
+        height: 50
     }
 
 }) ;

@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react';
 import { StyleSheet,  Text,  View, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { MaterialIcons as Icon }from '@expo/vector-icons';
 import Color from '../config/Variables';
 
 export default class Step extends Component{

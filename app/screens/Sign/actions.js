@@ -16,12 +16,12 @@ export function fetchUser(username, password){
                     let payloadParsed = JSON.parse(res.text);
                     AsyncStorage.setItem('token', payloadParsed.token);
                     dispatch({type: 'FETCH_USER_FULFILLED', payload: payloadParsed});
-
+                    Actions.DashboardNewUser()
                 }
                 catch (err){
                     dispatch({type: 'FETCH_USER_REJECTED'});
                 }
-                Actions.DashboardNewUser()
+
             });
     }
 }

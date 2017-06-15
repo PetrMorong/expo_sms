@@ -20,13 +20,12 @@ import Toolbar from '../../components/Toolbar';
 import Color from '../../config/Variables';
 import { connect } from 'react-redux';
 import { save } from '../../actions/index';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { MaterialIcons as Icon }from '@expo/vector-icons';
 import { Actions } from 'react-native-router-flux';
 import DrawerLayout from 'react-native-drawer-layout';
 
 
 import { TabViewAnimated, TabBar } from 'react-native-tab-view';
-import ElevatedView from 'react-native-elevated-view';
 
 import Sms from './Sms'
 import SmartSms from './SmartSms'

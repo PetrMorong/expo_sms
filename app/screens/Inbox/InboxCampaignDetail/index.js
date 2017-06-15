@@ -13,7 +13,7 @@ import {
     Switch,
     Dimensions,
     TextInput,
-    TouchableNativeFeedback,
+    TouchableOpacity,
     TouchableWithoutFeedback,
     ScrollView,
     ActivityIndicator
@@ -23,7 +23,7 @@ import Toolbar from '../../../components/Toolbar';
 import Color from '../../../config/Variables';
 import { connect } from 'react-redux';
 import { save, fetch } from '../../../actions/index';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { MaterialIcons as Icon }from '@expo/vector-icons';
 import { Actions } from 'react-native-router-flux';
 import FlatList from 'react-native/Libraries/Lists/FlatList';
 import GetProduct from '../../../helperFunctions/GetProduct';
@@ -228,11 +228,11 @@ export default class InboxCampaignDetail extends Component{
                 return <View style={{paddingLeft: 10, paddingRight: 5, marginLeft: 5, marginRight: 5, height: 40, backgroundColor: Color.chipsBackground, borderRadius: 30, flexDirection: 'row', alignItems: 'center', justifyContent: 'center',  }}>
                     <Text style={{color: Color.chipsText, fontWeight: '500'}}>{_(item)}:</Text>
                     <Text> <GetName name={x} item={item} identifier="inbox"/> </Text>
-                    <TouchableWithoutFeedback onPress={()=> this.clearFilter(item, x)}>
+                    <TouchableOpacity onPress={()=> this.clearFilter(item, x)}>
                         <View style={{width: 30, height: 40, alignItems: 'center', justifyContent: 'center'}}>
                             <Icon name="cancel" size={25} style={{color: 'lightgrey', marginLeft: 5}}/>
                         </View>
-                    </TouchableWithoutFeedback>
+                    </TouchableOpacity>
                 </View>
 
             })
@@ -240,11 +240,11 @@ export default class InboxCampaignDetail extends Component{
 
         let clearFilterIcon;
         if(Object.keys(this.state.filter).length !==0){
-            clearFilterIcon = <TouchableWithoutFeedback onPress={()=>this.clearFilterAll()}>
+            clearFilterIcon = <TouchableOpacity onPress={()=>this.clearFilterAll()}>
                 <View style={{width: 60, height: 40, alignItems: 'center', justifyContent: 'center'}}>
                     <Icon name="close" size={30}/>
                 </View>
-            </TouchableWithoutFeedback>
+            </TouchableOpacity>
         }
 
         let chips = <View style={{height: 60, alignItems: 'center', flexDirection: 'row'}}>

@@ -14,6 +14,7 @@ import {
     Dimensions,
     TextInput,
     TouchableOpacity,
+    TouchableWithoutFeedback,
     ScrollView,
     ActivityIndicator
 } from 'react-native';
@@ -22,7 +23,7 @@ import Toolbar from '../../components/Toolbar';
 import Color from '../../config/Variables';
 import { connect } from 'react-redux';
 import { save } from '../../actions/index';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { MaterialIcons as Icon }from '@expo/vector-icons';
 import { Actions } from 'react-native-router-flux';
 import { fetchUser, closeError } from './actions'
 import SuccessError from '../../components/SuccessError'
@@ -113,12 +114,12 @@ export default class SignIn extends Component {
                         </View>
                         {signButton}
                         <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 15}}>
-                            <TouchableOpacity onPress={()=>Actions.LostPassword()}>
+                            <TouchableWithoutFeedback onPress={()=>Actions.LostPassword()}>
                                 <View style={{flexDirection: 'row'}}>
                                     <Text style={{color: 'white'}}>{_('Forgot password')} ? </Text>
                                     <Text style={{color: 'white', fontWeight: '500'}}>{_('Get help signing in')}.</Text>
                                 </View>
-                            </TouchableOpacity>
+                            </TouchableWithoutFeedback>
                         </View>
                         <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 30}}>
                             <View style={{borderColor: 'grey', borderBottomWidth: 1, flex: 1}}/>
@@ -132,12 +133,12 @@ export default class SignIn extends Component {
                     </View>
                 </View>
                 <View style={styles.bottomTab}>
-                    <TouchableOpacity onPress={()=>Actions.SignUp()}>
+                    <TouchableWithoutFeedback onPress={()=>Actions.SignUp()}>
                         <View style={{flexDirection: 'row'}}>
                             <Text style={{color: 'white'}}>{_('Do not have an account')} ? </Text>
                             <Text style={{color: 'white', fontWeight: '500'}} >{_('Sign up')} </Text>
                         </View>
-                    </TouchableOpacity>
+                    </TouchableWithoutFeedback>
                 </View>
             </View>
         )
@@ -178,8 +179,8 @@ const styles = StyleSheet.create({
     },
     input: {
         width: window.width/ 10 * 7,
+        height: 55,
         color: 'white',
-        borderBottomColor: 'white',
         marginTop: 5,
         marginRight: 5
     },

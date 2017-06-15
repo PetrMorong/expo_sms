@@ -1,7 +1,7 @@
 /**
  * Created by Petr on 10.2.2017.
  */
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { MaterialIcons as Icon }from '@expo/vector-icons';
 import React, { Component } from 'react';
 import { StyleSheet, Button,  Text, Picker, View, Image, Switch,  Dimensions, TextInput, TouchableOpacity, ScrollView} from 'react-native';
 import Color from '../config/Variables'

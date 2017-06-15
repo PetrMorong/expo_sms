@@ -25,7 +25,7 @@ import Button from '../../../../../components/Button';
 import Color from '../../../../../config/Variables';
 import { connect } from 'react-redux';
 import { insertRecipient, fetch } from '../../../../../actions/index';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { MaterialIcons as Icon }from '@expo/vector-icons';
 import { Actions } from 'react-native-router-flux';
 import Step from '../../../../../components/StepperSingleStep';
 import DrawerLayout from 'react-native-drawer-layout';

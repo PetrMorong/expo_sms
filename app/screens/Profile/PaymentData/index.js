@@ -95,7 +95,7 @@ export default class PaymentData extends Component {
         });
 
         let country = <Picker
-            style={{width: window.width /10 * 9 -5, marginTop: 5, marginLeft: 5, color: 'grey'}}
+            style={{width: window.width /10 * 9 -5, marginTop: 5, marginLeft: 5, color: 'black'}}
             selectedValue={this.state.data.country}
             onValueChange={(country) => this.setState({data: {...this.state.data, country}, buttonStatus: 'default'})}>
             {items}
@@ -109,18 +109,18 @@ export default class PaymentData extends Component {
                 <TextInput
                     onChangeText={(company_name) => this.setState({data: {...this.state.data, company_name}, buttonStatus: 'default'})}
                     value={this.state.company_name}
-                    style={{marginLeft: 10, marginRight: 10}}
+                    style={styles.input}
                     placeholder={_('Company name')}/>
                 <View style={{flexDirection: 'row'}}>
                     <TextInput
                         onChangeText={(company_number) => this.setState({data: {...this.state.data, company_number}, buttonStatus: 'default'})}
                         value={this.state.company_number}
-                        style={{flex: 1, marginLeft: 10, marginRight: 10}}
+                        style={styles.input}
                         placeholder={_('Company id')}/>
                     <TextInput
                         onChangeText={(company_vat) => this.setState({data: {...this.state.data, company_vat}, buttonStatus: 'default'})}
                         value={this.state.company_vat}
-                        style={{flex: 1, marginLeft: 10, marginRight: 10}}
+                        style={styles.input}
                         placeholder={_('Company vat')}/>
                 </View>
             </View>
@@ -145,31 +145,31 @@ export default class PaymentData extends Component {
                             <TextInput
                                 onChangeText={(first_name) => this.setState({data: {...this.state.data, first_name}, buttonStatus: 'default'})}
                                 value={this.state.data.first_name}
-                                style={{flex: 1, marginLeft: 10, marginRight: 10, }}
+                                style={styles.input}
                                 placeholder={_('First name')}/>
                             <TextInput
                                 onChangeText={(last_name) => this.setState({data: {...this.state.data, last_name}, buttonStatus: 'default'})}
                                 value={this.state.data.last_name}
-                                style={{flex: 1, marginLeft: 10, marginRight: 10, }}
+                                style={styles.input}
                                 placeholder={_('Last name')}/>
                         </View>
                         <View>
                             <TextInput
                                 onChangeText={(street1) => this.setState({data: {...this.state.data, street1}, buttonStatus: 'default'})}
                                 value={this.state.data.street1}
-                                style={{marginLeft: 10, marginRight: 10, }}
+                                style={styles.input}
                                 placeholder={_('Street')}/>
                         </View>
                         <View style={{flexDirection: 'row'}}>
                             <TextInput
                                 onChangeText={(city) => this.setState({data: {...this.state.data, city}})}
                                 value={this.state.data.city}
-                                style={{flex: 1, marginLeft: 10, marginRight: 10, }}
+                                style={styles.input}
                                 placeholder={_('City')}/>
                             <TextInput
                                 onChangeText={(zip) => this.setState({data: {...this.state.data, zip}})}
                                 value={this.state.data.zip}
-                                style={{flex: 1, marginLeft: 10, marginRight: 10, }}
+                                style={styles.input}
                                 placeholder={_('Zip')}/>
                         </View>
                         <View>
@@ -229,7 +229,16 @@ const styles = StyleSheet.create({
     buttonText: {
         fontWeight: '500',
         color: Color.buttonText
-    }
+    },
+    input: {
+        color: 'black',
+        borderBottomColor: 'green',
+        flex: 1,
+        padding: 5,
+        marginLeft: 10,
+        marginRight: 10,
+        height: 50
+    },
 });
 
 module.exports = connect(mapStateToProps)(PaymentData);
